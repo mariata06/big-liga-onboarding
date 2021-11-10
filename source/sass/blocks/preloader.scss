@@ -16,6 +16,12 @@
   }
 }
 
+.preloader--done {
+  visibility: hidden;
+  opacity: 0;
+  transition: 1s;
+}
+
 .preloader__logo {
   display: flex;
   justify-content: center;
@@ -41,7 +47,7 @@
 
 .preloader__symbol-a {
   display: none;
-  display: block;
+  //display: block;
   margin-right: 35px;
 }
 
@@ -81,5 +87,82 @@
   display: none;
   @media (max-width: $viewport--md) {
     display: block;
+  }
+}
+
+// Стили для анимации элементов
+//анимирование букв в слове Лига
+.preloader__letter--animate {
+  /* visibility: visible; */
+  display: block;
+  transition: 3.5s;
+  animation: preloader-letter 3.5s;
+}
+
+@keyframes preloader-letter {
+  0% {
+    opacity: 0.1;
+  }
+  30% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 0.3;
+  }
+  70% {
+    opacity: 0.7;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+//анимирование значка с а
+.preloader__symbol-a--animate {
+  display: block;
+  animation: preloader-symbol-a 1s;
+}
+
+@keyframes preloader-symbol-a {
+  0% {
+    transform: translate(0, -2000px);
+  }
+  70% {
+    transform: translate(0, 30px);
+  }
+  90% {
+    transform: translate(0, -10px);
+  }
+  100% {
+    transform: translate(-0, 0);
+  }
+}
+
+//анимирование букв в словах фронтенд аутсорс
+.preloader__text-letter--animate {
+  /* visibility: visible; */
+  display: block;
+  transition: 3.5s;
+  animation: preloader-textletter 3.5s;
+}
+
+@keyframes preloader-textletter {
+  0% {
+    opacity: 0.1;
+  }
+  20% {
+    opacity: 0.5;
+  }
+  40% {
+    opacity: 0.3;
+  }
+  60% {
+    opacity: 0.7;
+    }
+  80% {
+    opacity: 0.4;
+  }
+  100% {
+    opacity: 1;
   }
 }
