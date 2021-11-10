@@ -114,9 +114,10 @@
   @media (max-width: $viewport--md) {
     &--animate {
     /* visibility: visible; */
-    display: block;
-    transition: 3.5s;
+    //display: block;
+    //transition: 3.5s;
     //animation: main-screen-block 3.5s;
+    left: 0px;
     animation: main-screen-block 2s;
     }
   }
@@ -124,16 +125,20 @@
 
 @keyframes main-screen-block {
   0% {
-    transform: translateX(-576px);
+    //transform: translateX(-576px);
+    transform: translate(-576px, 0);
   }
   30% {
-    transform: translateX(-384px);
+    //transform: translateX(-384px);
+    transform: translate(-384px, 0);
   }
   50% {
-    transform: translateX(-192px);
+    //transform: translateX(-192px);
+    transform: translate(-192px, 0);
   }
   100% {
-    transform: translateX(0px);
+    transform: translate(0, 0);
+    //transform: translateX(0px);
   }
 }
 
