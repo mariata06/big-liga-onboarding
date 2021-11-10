@@ -1,0 +1,85 @@
+.preloader {
+  padding-top: 334px;
+  padding-bottom: 100px;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  background-color: #ffffff;
+  visibility: visible;
+  min-height: calc(100 * var(--vh, 1vh));
+
+  @media (max-width: $viewport--md) {
+    padding-top: 477px;
+  }
+}
+
+.preloader__logo {
+  display: flex;
+  justify-content: center;
+
+  @media (max-width: $viewport--md) {
+    transform: scale(0.7);
+  }
+}
+
+.preloader__name {
+  display: flex;
+  width: 347px;
+  margin-right: 18px;
+}
+
+.preloader__name .preloader__letter {
+  margin-right: 13px;
+}
+
+.preloader__name .preloader__letter-g {
+  margin-right: 0;
+}
+
+.preloader__symbol-a {
+  display: none;
+  display: block;
+  margin-right: 35px;
+}
+
+.preloader__text-top,
+.preloader__text-bottom {
+  display: flex;
+}
+
+.preloader__text-top .preloader__text-letter,
+.preloader__text-bottom .preloader__text-letter {
+  margin-right: 11px;
+}
+
+.preloader__text-top svg:last-child {
+  margin-bottom: -8px;
+}
+
+.preloader__paragraph {
+  font-family: $font-family--neue-machina;
+  font-size: 24px;
+  margin-top: 212px;
+  text-align: center;
+
+  @media (max-width: $viewport--sm) {
+    margin-top: auto;
+    margin-bottom: 0;
+  }
+}
+
+.preloader__paragraph-1 {
+  @media (max-width: $viewport--md) {
+    display: none;
+  }
+}
+
+.preloader__paragraph-2 {
+  display: none;
+  @media (max-width: $viewport--md) {
+    display: block;
+  }
+}

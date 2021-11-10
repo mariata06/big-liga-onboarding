@@ -14,6 +14,7 @@ const del = require('del');
 const webpackStream = require('webpack-stream');
 const webpackConfig = require('./webpack.config.js');
 const fileinclude = require('gulp-file-include');
+//const gcmq = require('gulp-group-css-media-queries');
 
 const html = () => {
   return gulp.src(['source/html/*.html'])
@@ -33,8 +34,9 @@ const css = () => {
       .pipe(sourcemap.init())
       .pipe(sass())
       .pipe(postcss([autoprefixer({
-        grid: true,
+        grid: false
       })]))
+      //.pipe(gcmq())
       .pipe(gulp.dest('build/css'))
       .pipe(csso())
       .pipe(rename('style.min.css'))
@@ -49,6 +51,7 @@ const js = () => {
       .pipe(gulp.dest('build/js'))
 };
 
+//оставить, т.к. нужно для оптимизации svg графики
 const svgo = () => {
   return gulp.src('source/img/**/*.{svg}')
       .pipe(imagemin([
@@ -63,12 +66,13 @@ const svgo = () => {
       .pipe(gulp.dest('source/img'));
 };
 
-const sprite = () => {
-  return gulp.src('source/img/sprite/*.svg')
-      .pipe(svgstore({inlineSvg: true}))
-      .pipe(rename('sprite_auto.svg'))
-      .pipe(gulp.dest('build/img'));
-};
+//удалить, т.к. иконки надо вставить в разметку инлайном
+// const sprite = () => {
+//   return gulp.src('source/img/sprite/*.svg')
+//       .pipe(svgstore({inlineSvg: true}))
+//       .pipe(rename('sprite_auto.svg'))
+//       .pipe(gulp.dest('build/img'));
+// };
 
 const syncserver = () => {
   server.init({
@@ -83,7 +87,8 @@ const syncserver = () => {
   gulp.watch('source/sass/**/*.{scss,sass}', gulp.series(css));
   gulp.watch('source/js/**/*.{js,json}', gulp.series(js, refresh));
   gulp.watch('source/data/**/*.{js,json}', gulp.series(copy, refresh));
-  gulp.watch('source/img/**/*.svg', gulp.series(copysvg, sprite, html, refresh));
+  //gulp.watch('source/img/**/*.svg', gulp.series(copysvg, sprite, html, refresh));
+  gulp.watch('source/img/**/*.svg', gulp.series(copysvg, html, refresh));
   gulp.watch('source/img/**/*.{png,jpg}', gulp.series(copypngjpg, html, refresh));
 };
 
@@ -92,6 +97,7 @@ const refresh = (done) => {
   done();
 };
 
+//это нужно для спрайта или просто для копирования svg?
 const copysvg = () => {
   return gulp.src('source/img/**/*.svg', {base: 'source'})
       .pipe(gulp.dest('build'));
@@ -108,7 +114,7 @@ const copy = () => {
     'source/favicon/**',
     'source/img/**',
     'source/data/**',
-    'source/file/**',
+    //'source/file/**',
     'source/*.php',
     'source/video/**', // учтите, что иногда git искажает видеофайлы, некоторые шрифты, pdf и gif - проверяйте и если обнаруживаете баги - скидывайте тестировщику такие файлы напрямую
     'source/downloads/**',
@@ -118,11 +124,20 @@ const copy = () => {
       .pipe(gulp.dest('build'));
 };
 
+const createWebp = () => {
+  const root = ``;
+  return gulp.src(`source/img/${root}**/*.{png,jpg}`)
+    .pipe(webp({ quality: 90 }))
+    .pipe(gulp.dest(`build/img/${root}`));
+};
+
 const clean = () => {
   return del('build');
 };
 
-const build = gulp.series(clean, svgo, copy, css, sprite, js, html);
+//так было вначале
+//const build = gulp.series(clean, svgo, copy, css, sprite, js, html);
+const build = gulp.series(clean, svgo, copy, css, createWebp, js, html);
 
 const start = gulp.series(build, syncserver);
 
@@ -130,11 +145,12 @@ const start = gulp.series(build, syncserver);
 //---------------------------------
 // Вызывайте через 'npm run taskName'
 
-const createWebp = () => {
-  return gulp.src('source/img/**/*.{png,jpg}')
-      .pipe(webp({quality: 90}))
-      .pipe(gulp.dest('source/img'));
-};
+//creayteWebp - так было вначале
+// const createWebp = () => {
+//   return gulp.src('source/img/**/*.{png,jpg}')
+//       .pipe(webp({quality: 90}))
+//       .pipe(gulp.dest('source/img'));
+// };
 
 const optimizeImages = () => {
   return gulp.src('build/img/**/*.{png,jpg}')
