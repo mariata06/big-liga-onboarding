@@ -32,30 +32,6 @@
 
   @media (max-width: $viewport--md) {
     padding-left: 35px;
-    &--hide {
-      display: none;
-    }
-  }
-}
-
-.main-screen__block {
-  display: block;
-  @media (max-width: $viewport--md) {
-    display: none;
-    display: block;
-    width: 100%;
-    height: 100%;
-    min-height: 950px;
-    display: block;
-    position: absolute;
-    top: 0;
-    left: 0;
-    left: -768px;
-    z-index: 100;
-    background-color: $color-neon-blue;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
   }
 }
 
@@ -72,14 +48,10 @@
 
   @media (max-width: $viewport--md) {
     display: block;
-    //margin-top: 235px;
-    //margin: 235px auto 0;
   }
 }
 
 .main-screen__image {
-  //display: none;
-
   @media (max-width: $viewport--md) {
     display: flex;
     justify-content: center;
@@ -103,7 +75,6 @@
   @media (max-width: $viewport--md) {
     color: #ffffff;
     display: block;
-    //margin-top: 35px;
     margin: 35px auto 0;
   }
 }
@@ -111,105 +82,41 @@
 // Стили для анимации элементов
 //анимирование блока main-screen__block
 .main-screen__block {
+  display: block;
   @media (max-width: $viewport--md) {
+    width: 100%;
+    height: 100%;
+    min-height: 950px;
+    position: absolute;
+    top: 0;
+    transform: translateX(-100%);
+    z-index: 100;
+    background-color: $color-neon-blue;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
     &--animate {
-    /* visibility: visible; */
-    //display: block;
-    //transition: 3.5s;
-    //animation: main-screen-block 3.5s;
-    left: 0px;
-    animation: main-screen-block 2s;
+      animation: main-screen-block 0.5s forwards;
+    }
+
+    &--animateback {
+      animation: main-screen-block-back 0.5s forwards;
     }
   }
 }
 
 @keyframes main-screen-block {
-  0% {
-    //transform: translateX(-576px);
-    transform: translate(-576px, 0);
-  }
-  30% {
-    //transform: translateX(-384px);
-    transform: translate(-384px, 0);
-  }
-  50% {
-    //transform: translateX(-192px);
-    transform: translate(-192px, 0);
-  }
   100% {
-    transform: translate(0, 0);
-    //transform: translateX(0px);
+    transform: translateX(0%);
   }
 }
 
-// .main-screen__block--animateforward {
-//   /* visibility: visible; */
-//   display: block;
-//   transition: 3.5s;
-//   //animation: main-screen-block 3.5s;
-//   animation: main-screen-block-1 2s ease-in-out;
-// }
-
-// @keyframes main-screen-block-1 {
-//   0% {
-//     //opacity: 0.1;
-//     transform: translateX(-576px);
-//   }
-//   30% {
-//     //opacity: 1;
-//     transform: translateX(-384px);
-//   }
-//   50% {
-//     //opacity: 1;
-//     transform: translateX(-192px);
-//   }
-//   100% {
-//     //opacity: 0.1;
-//     transform: translateX(0);
-//   }
-// }
-
-// .main-screen__block--animatebackward {
-//   /* visibility: visible; */
-//   display: block;
-//   transition: 3.5s;
-//   //animation: main-screen-block 3.5s;
-//   animation: main-screen-block-2 2s ease-in-out;
-// }
-
-// @keyframes main-screen-block-2 {
-//   0% {
-//     //opacity: 0.1;
-//     transform: translateX(0);
-//   }
-//   30% {
-//     //opacity: 1;
-//     transform: translateX(-192px);
-//   }
-//   50% {
-//     //opacity: 1;
-//     transform: translateX(-384px);
-//   }
-//   100% {
-//     //opacity: 0.1;
-//     transform: translateX(-576px);
-//   }
-// }
-
-// @keyframes main-screen-block {
-//   0% {
-//     transform: translateX(-615px);
-//   }
-//   25% {
-//     transform: translateX(-462px);
-//   }
-//   50% {
-//     transform: translateX(-309px);
-//   }
-//   75% {
-//     transform: translateX(-156px);
-//   }
-//   100% {
-//     transform: translateX(0);
-//   }
-// }
+@keyframes main-screen-block-back {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
